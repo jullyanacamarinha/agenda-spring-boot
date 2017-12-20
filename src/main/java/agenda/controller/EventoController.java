@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,14 +32,14 @@ public class EventoController {
 		return eventoService.save(evento);
 	}
 
-	@PutMapping("/eventos")
-	public Evento alterarEvento(@RequestBody Evento evento) {
-		return eventoService.save(evento);
+	@PutMapping("/eventos/{id}")
+	public Evento alterarEvento(@PathVariable("id") Long id, @RequestBody Evento evento) {
+		return eventoService.alterar(id, evento);
 	}
 
-	@DeleteMapping("/eventos")
-	public void excluir(@RequestBody Evento evento) {
-		eventoService.delete(evento);
+	@DeleteMapping("/eventos/{id}")
+	public void excluir(@PathVariable("id") Long id) {
+		eventoService.remover(id);
 	}
 
 }

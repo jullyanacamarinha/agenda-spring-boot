@@ -1,7 +1,5 @@
 package agenda.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +11,19 @@ public class EventoService extends CrudService<Evento> {
 
 	@Autowired
 	private EventoRepository eventoRepository;
-
-
+	
+	public void remover(Long id) {
+		eventoRepository.removerEvento(id);
+	}
+	
+	public Evento alterar(Long id, Evento evento){
+		Evento eventoTemp = eventoRepository.findOne(id);
+		if(eventoTemp != null){
+			evento.setId(id);
+			return eventoRepository.save(evento);
+		}
+		else{
+			return null;
+		}
+	}
 }
